@@ -1,8 +1,9 @@
 class Api::V1::TetrisController < ApplicationController
 
 	def index
-		@games = Game.all
-		render json: @games
+		@games = Game.all.sort
+		@games.sort_by! {|game| game.score}
+		render json: @games.reverse
 	end
 
 	def create
